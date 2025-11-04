@@ -188,8 +188,7 @@ _**As a malicious user, I want to run a script to rapidly guess a user's passwor
 
 # C4 Model
 
-![img_1.png](img_1.png)
-
+![C4 Model.png](C4%20Model.png)
 ## C1: System Context Diagram
 
 ![C1.png](C1.png)
