@@ -1,11 +1,16 @@
-# core/serializers.py
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import DailyWorkout, DietLog, FoodItem
+from .models import (
+    Exercise,
+    WorkoutSet,
+    DietLog,
+    FoodItem
+)
 
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the User model, used for registration."""
+
     class Meta:
         model = User
         fields = ['id', 'username', 'password']
@@ -16,33 +21,49 @@ class UserSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
+# --- NEW WORKOUT 2.0 SERIALIZERS ---
+
+class ExerciseSerializer(serializers.ModelSerializer):
+    """Serializer for the Exercise model."""
+
+    class Meta:
+        model = Exercise
+        fields = ['id', 'user', 'name', 'muscle_group']
+        read_only_fields = ['user']
+
+
+class WorkoutSetSerializer(serializers.ModelSerializer):
+    """Serializer for the WorkoutSet model."""
+    # We include 'exercise_name' to make it easy for the frontend
+    # to display the name of the exercise without a separate API call.
+    exercise_name = serializers.CharField(source='exercise.name', read_only=True)
+
+    class Meta:
+        model = WorkoutSet
+        fields = [
+            'id', 'user', 'exercise', 'exercise_name',
+            'date', 'reps', 'weight'
+        ]
+        read_only_fields = ['user']
+        # 'exercise' will be write-only (we pass an ID)
+        # 'exercise_name' will be read-only
+
+
+# --- UNCHANGED DIET SERIALIZERS ---
+
 class FoodItemSerializer(serializers.ModelSerializer):
     """Serializer for the FoodItem model."""
+
     class Meta:
         model = FoodItem
         fields = ['id', 'meal_type', 'name', 'calories']
-        # diet_log is handled automatically when we nest this serializer
 
 
 class DietLogSerializer(serializers.ModelSerializer):
     """Serializer for the daily DietLog. It includes its related food items."""
-    # This 'food_items' field will nest the FoodItemSerializer
-    # 'many=True' means it can handle multiple food items
-    # 'read_only=True' means it will be included when reading a DietLog,
-    # but we'll use a different endpoint to create/delete food items.
     food_items = FoodItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = DietLog
         fields = ['id', 'user', 'date', 'food_items']
-        # Make the 'user' field read-only. We will set it
-        # automatically in the view based on the logged-in user.
-        read_only_fields = ['user']
-
-
-class DailyWorkoutSerializer(serializers.ModelSerializer):
-    """Serializer for the DailyWorkout model."""
-    class Meta:
-        model = DailyWorkout
-        fields = ['id', 'user', 'day_of_week', 'focus', 'exercises']
         read_only_fields = ['user']
