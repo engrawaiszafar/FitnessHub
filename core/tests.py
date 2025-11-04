@@ -80,7 +80,7 @@ class FitnessHubAPITests(APITestCase):
 
     # --- Test 3: Workout Planner API (Authenticated) ---
 
-    def test_create_and__list_workout(self):
+    def test_create_and_list_workout(self):
         """
         Tests the "happy path" for the workout planner.
         A user logs in, creates a workout, and then views it.
