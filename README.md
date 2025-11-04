@@ -7,31 +7,32 @@ The "why" of this project is to provide a single, reliable platform for users to
 
 The backend is built with Django and Django REST Framework, containerized with Docker, and connected to a PostgreSQL database. The frontend is a modern, responsive static HTML/JavaScript file that provides a dynamic, app-like experience without requiring a complex JavaScript framework.
 
-Installation
+# Installation
+
 This project is designed to be run with Docker and Docker Compose.
 
-# 1. Clone the repository
-git clone https://github.com/engrawaiszafar/FitnessHub.git
+## 1. Clone the repository
 
-`cd fitnesshub`
+`git clone https://github.com/engrawaiszafar/FitnessHub.git`
 
-# 2. Build and start the containers in the background
+`cd FitnessHub`
+
+## 2. Build and start the containers in the background
 This will build the 'app' image and start 'app' and 'db' services.
 
 `docker-compose up --build -d`
 
-# 3. Run database migrations
+## 3. Run database migrations
 This applies the database schema (models) to the PostgreSQL container.
 
 _`docker-compose exec app python manage.py migrate`_
 
-# 4. (Optional) Create a superuser to access the Django admin
+## 4. (Optional) Create a superuser to access the Django admin
 This admin panel is at _http://127.0.0.1:8000/admin/_
 
 `docker-compose exec app python manage.py createsuperuser`
 
-### Getting Started
-
+# Running the Application
 
 The project is split into two parts: 
 
