@@ -1,8 +1,9 @@
+# core/tests.py
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
-# from .models import DietLog  <-- REMOVED. Fixes F401 'imported but unused'
 import datetime
+from .models import Exercise  # <-- We need this new import
 
 
 # Note: APITestCase creates a new, clean database for every single test function.
@@ -17,6 +18,13 @@ class FitnessHubAPITests(APITestCase):
         """
         self.user1 = User.objects.create_user(username='user1', password='password123')
         self.user2 = User.objects.create_user(username='user2', password='password123')
+
+        # We also create a re-usable exercise for user1
+        self.exercise1 = Exercise.objects.create(
+            user=self.user1,
+            name='Bench Press',
+            muscle_group='Chest'
+        )
 
     # --- Test 1: User Registration & Login (Public Endpoints) ---
 
@@ -51,7 +59,8 @@ class FitnessHubAPITests(APITestCase):
         Tests that a logged-out user CANNOT access protected data.
         """
         # We don't log in (no self.client.force_authenticate)
-        response = self.client.get('/api/workouts/')
+        # We now test the '/api/sets/' endpoint, which is protected.
+        response = self.client.get('/api/sets/')
 
         # 401 (Unauthorized) is the expected failure
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -60,53 +69,65 @@ class FitnessHubAPITests(APITestCase):
         """
         Tests that User 1 CANNOT see User 2's data. This is critical.
         """
-        # 1. User 1 logs in and creates a workout
+        # 1. User 1 logs in and creates a WorkoutSet (using the exercise we made in setUp)
         self.client.force_authenticate(user=self.user1)
-        self.client.post('/api/workouts/', {
-            'day_of_week': 1,  # Monday
-            'focus': 'User 1 Workout'
+        today = datetime.date(2025, 11, 4)
+        self.client.post('/api/sets/', {
+            'exercise': self.exercise1.id,
+            'date': today,
+            'reps': 10,
+            'weight': 135
         })
 
         # 2. User 2 logs in
         self.client.force_authenticate(user=self.user2)
 
-        # 3. User 2 tries to GET all workouts
-        response = self.client.get('/api/workouts/')
+        # 3. User 2 tries to GET all sets
+        response = self.client.get(f'/api/sets/?date={today}')
 
         # User 2 should get a 200 (OK) response, but the list of
-        # workouts should be empty (length 0).
+        # sets should be empty (length 0).
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
 
     # --- Test 3: Workout Planner API (Authenticated) ---
 
-    def test_create_and_list_workout(self):
+    def test_create_exercise_and_set(self):
         """
         Tests the "happy path" for the workout planner.
-        A user logs in, creates a workout, and then views it.
+        A user logs in, creates an exercise, then logs a set.
         """
         # 1. Log in as user1
         self.client.force_authenticate(user=self.user1)
+        today = datetime.date(2025, 11, 4)
 
-        # 2. Create a workout
-        payload = {
-            'day_of_week': 2,  # Tuesday
-            'focus': 'Leg Day',
-            'exercises': 'Squats\n3x10'
+        # 2. Create a new Exercise
+        exercise_payload = {
+            'name': 'Squat',
+            'muscle_group': 'Legs'
         }
-        create_response = self.client.post('/api/workouts/', payload)
+        ex_response = self.client.post('/api/exercises/', exercise_payload)
+        self.assertEqual(ex_response.status_code, status.HTTP_201_CREATED)
 
-        # --- THIS WAS THE TYPO FIX (HTTP_201_CREATED) ---
-        self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
+        # Get the ID of the new exercise
+        exercise_id = ex_response.data['id']
 
-        # 3. List the workouts
-        list_response = self.client.get('/api/workouts/')
+        # 3. Create a new WorkoutSet for that exercise
+        set_payload = {
+            'exercise': exercise_id,
+            'date': today,
+            'reps': 8,
+            'weight': 225
+        }
+        set_response = self.client.post('/api/sets/', set_payload)
+        self.assertEqual(set_response.status_code, status.HTTP_201_CREATED)
+
+        # 4. List the sets for today and check that the data is correct
+        list_response = self.client.get(f'/api/sets/?date={today}')
         self.assertEqual(list_response.status_code, status.HTTP_200_OK)
-
-        # 4. Check that the created data is in the list
         self.assertEqual(len(list_response.data), 1)
-        self.assertEqual(list_response.data[0]['focus'], 'Leg Day')
-        self.assertEqual(list_response.data[0]['day_of_week'], 2)
+        self.assertEqual(list_response.data[0]['exercise_name'], 'Squat')
+        self.assertEqual(list_response.data[0]['reps'], 8)
 
     # --- Test 4: Diet Planner API (Authenticated) ---
 
