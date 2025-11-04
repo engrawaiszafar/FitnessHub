@@ -11,6 +11,7 @@ from .serializers import (
     FoodItemSerializer
 )
 
+
 class CreateUserViewSet(viewsets.ModelViewSet):
     """Create a new user in the system"""
     queryset = User.objects.all()
@@ -18,11 +19,13 @@ class CreateUserViewSet(viewsets.ModelViewSet):
     # No authentication needed to create a user
     permission_classes = [permissions.AllowAny]
 
+
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user"""
     # This view is provided by DRF, we just need to hook it into our URLs.
     # It takes 'username' and 'password' and returns a 'token'.
     pass
+
 
 class DailyWorkoutViewSet(viewsets.ModelViewSet):
     """Manage daily workouts in the database"""
@@ -39,6 +42,7 @@ class DailyWorkoutViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Save the new workout and assign it to the logged-in user"""
         serializer.save(user=self.request.user)
+
 
 class DietLogViewSet(viewsets.ModelViewSet):
     """Manage daily diet logs in the database"""
@@ -59,6 +63,7 @@ class DietLogViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Save the new diet log and assign it to the logged-in user"""
         serializer.save(user=self.request.user)
+
 
 class FoodItemViewSet(viewsets.ModelViewSet):
     """Manage food items for diet logs"""

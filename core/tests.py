@@ -143,4 +143,3 @@ class FitnessHubAPITests(APITestCase):
         self.assertEqual(list_response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(list_response.data[0]['food_items']), 1)
         self.assertEqual(list_response.data[0]['food_items'][0]['name'], 'Apple')
-

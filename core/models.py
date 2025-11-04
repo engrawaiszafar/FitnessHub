@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # --- WORKOUT PLANNER MODELS ---
 # Replaces: workoutPlan_[user]
 
+
 class DailyWorkout(models.Model):
     """
     Represents a single day's workout plan for a user.
@@ -49,6 +50,7 @@ class DietLog(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Diet Log for {self.date}"
+
 
 class FoodItem(models.Model):
     """

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import DailyWorkout, DietLog, FoodItem
 
+
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the User model, used for registration."""
     class Meta:
@@ -14,12 +15,14 @@ class UserSerializer(serializers.ModelSerializer):
         """Create and return a new user with an encrypted password."""
         return User.objects.create_user(**validated_data)
 
+
 class FoodItemSerializer(serializers.ModelSerializer):
     """Serializer for the FoodItem model."""
     class Meta:
         model = FoodItem
         fields = ['id', 'meal_type', 'name', 'calories']
         # diet_log is handled automatically when we nest this serializer
+
 
 class DietLogSerializer(serializers.ModelSerializer):
     """Serializer for the daily DietLog. It includes its related food items."""
@@ -35,6 +38,7 @@ class DietLogSerializer(serializers.ModelSerializer):
         # Make the 'user' field read-only. We will set it
         # automatically in the view based on the logged-in user.
         read_only_fields = ['user']
+
 
 class DailyWorkoutSerializer(serializers.ModelSerializer):
     """Serializer for the DailyWorkout model."""
