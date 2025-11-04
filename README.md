@@ -1,4 +1,5 @@
 # **FitnessHub**
+![logo.png](logo.png)
 
 FitnessHub is a comprehensive, full-stack personal wellness planner. It provides a secure, robust, and scalable backend API for a modern, single-page frontend application. It moves beyond simple static logs by providing a dynamic and secure backend, allowing authenticated users to manage and track their fitness journey in granular detail.
 
@@ -27,9 +28,10 @@ _`docker-compose exec app python manage.py migrate`_
 # 4. (Optional) Create a superuser to access the Django admin
 This admin panel is at _http://127.0.0.1:8000/admin/_
 
-docker-compose exec app python manage.py createsuperuser
+`docker-compose exec app python manage.py createsuperuser`
 
 ### Getting Started
+
 
 The project is split into two parts: 
 
@@ -150,6 +152,7 @@ This document defines the functional and security requirements for the FitnessHu
 - The dashboard has buttons that link directly to the full "Workout Planner" and "Diet Planner" pages.
 
 ## Mis-user Stories
+
 ***As a malicious user, I want to guess API endpoint IDs to see another user's private workout and diet logs so I can steal their personal health information.***
 
 #### Mitigation Criteria:
@@ -181,6 +184,24 @@ _**As a malicious user, I want to run a script to rapidly guess a user's passwor
 * The frontend JavaScript performs a validation check (parseInt, parseFloat) before submitting data to the API and shows an alert if the data is invalid.
 
 * The backend API serializers (IntegerField, DecimalField) will reject any non-numeric data with a 400 Bad Request response, ensuring data integrity in the database.
+
+# C4 Model
+
+![img_1.png](img_1.png)
+
+## C1: System Context Diagram
+
+![C1.png](C1.png)
+
+## C2: Container Diagram
+
+![Screenshot 2025-11-04 083546.png](Screenshot%202025-11-04%20083546.png)
+
+## C3: Component Diagram
+
+![Screenshot 2025-11-04 083328.png](Screenshot%202025-11-04%20083328.png)
+
+
 
 # License
 
