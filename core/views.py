@@ -4,6 +4,11 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from datetime import date
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from datetime import date
+from .models import DietLog, WorkoutSet # <-- Import your models
 
 # --- UPDATED IMPORTS ---
 from .models import (
@@ -107,9 +112,21 @@ class FoodItemViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(diet_log__user=self.request.user)
 
     def perform_create(self, serializer):
-        """Create a new food item."""
+        """
+        --- THIS IS THE FIX ---
+        Link the new food item to a diet log.
+        The frontend must provide 'diet_log_id' in the request body.
+        """
         diet_log_id = self.request.data.get('diet_log_id')
-        diet_log = DietLog.objects.get(id=diet_log_id, user=self.request.user)
+
+        # Check that the diet log exists and belongs to the user
+        try:
+            diet_log = DietLog.objects.get(id=diet_log_id, user=self.request.user)
+        except DietLog.DoesNotExist:
+            # If it doesn't exist or doesn't belong to user, deny permission
+            raise permissions.PermissionDenied("Invalid diet log ID or not authorized.")
+
+        # Save the food item, linked to the correct diet log
         serializer.save(diet_log=diet_log)
 
 
