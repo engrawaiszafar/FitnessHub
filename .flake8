@@ -1,17 +1,10 @@
 [flake8]
+# Ignore the same errors as your command
+ignore = E501, W503
 
-1. Ignore the 'venv' directory completely
-
-This will fix 99% of the errors in your log.
-
-exclude = venv
-
-2. Set the max line length to 100
-
-max-line-length = 100
-
-3. Ignore these specific "noisy" style errors
-
-(E302, W292, etc., from your log)
-
-ignore = E302, W292, E122, E501, W503
+# Exclude these folders from being scanned
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    .venv
