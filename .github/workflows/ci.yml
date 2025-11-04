@@ -1,0 +1,65 @@
+# .github/workflows/ci.yml
+
+name: Check, Lint & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # This 'services' block starts up a PostgreSQL database
+    # just for this test run.
+    services:
+      db:
+        image: postgres:13
+        # These env vars must match the 'db' service in your docker-compose.yml
+        environment:
+          POSTGRES_DB: fitnesshub_db
+          POSTGRES_USER: fitnesshub_user
+          POSTGRES_PASSWORD: supersecretpassword
+        ports:
+          - 5432:5432
+        # Healthcheck to make sure the db is ready before tests run
+        options: >-
+          --health-cmd "pg_isready -U fitnesshub_user -d fitnesshub_db" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install build-essential libpq-dev
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run linter (flake8)
+      run: |
+        flake8 --ignore=E501,W503 .
+
+    - name: Run Django tests
+      run: |
+        python manage.py test
+      env:
+        # We must provide the env vars for the DB connection,
+        # telling Django to connect to the 'db' service we defined above.
+        DB_HOST: localhost # 'localhost' works here because we map port 5432
+        DB_NAME: fitnesshub_db
+        DB_USER: fitnesshub_user
+        DB_PASS: supersecretpassword
