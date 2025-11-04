@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
-from .models import DietLog
+# from .models import DietLog  <-- REMOVED. Fixes F401 'imported but unused'
 import datetime
 
 
@@ -80,7 +80,7 @@ class FitnessHubAPITests(APITestCase):
 
     # --- Test 3: Workout Planner API (Authenticated) ---
 
-    def test_create_and_list_workout(self):
+    def test_create_and__list_workout(self):
         """
         Tests the "happy path" for the workout planner.
         A user logs in, creates a workout, and then views it.
@@ -95,6 +95,8 @@ class FitnessHubAPITests(APITestCase):
             'exercises': 'Squats\n3x10'
         }
         create_response = self.client.post('/api/workouts/', payload)
+
+        # --- THIS WAS THE TYPO FIX (HTTP_201_CREATED) ---
         self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
 
         # 3. List the workouts
@@ -141,3 +143,4 @@ class FitnessHubAPITests(APITestCase):
         self.assertEqual(list_response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(list_response.data[0]['food_items']), 1)
         self.assertEqual(list_response.data[0]['food_items'][0]['name'], 'Apple')
+

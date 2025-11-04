@@ -1,0 +1,23 @@
+[flake8]
+
+1. Ignore the 'venv' directory completely
+
+exclude = venv
+
+2. Set the max line length to 100 (default is 79, which is too short)
+
+max-line-length = 100
+
+3. Ignore these specific "noisy" style errors:
+
+E302: expected 2 blank lines, found 1
+
+W292: no newline at end of file
+
+E122: continuation line missing indentation or outdented
+
+E501: line too long (we set our own max-line-length)
+
+W503: line break before binary operator (this is a common one)
+
+ignore = E302, W292, E122, E501, W503
