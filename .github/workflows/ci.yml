@@ -12,7 +12,7 @@ jobs:
     
     services:
       db:
-        image: postgres:13
+        image: postgres:16-alpine
         # These env vars must match the 'db' service in your docker-compose.yml
         env: # <-- THIS IS THE FIX (was 'environment:')
           POSTGRES_DB: fitnesshub_db
