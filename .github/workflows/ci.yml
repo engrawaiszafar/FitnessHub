@@ -1,5 +1,3 @@
-# .github/workflows/ci.yml
-
 name: Check, Lint & Test
 
 on:
@@ -11,14 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # This 'services' block starts up a PostgreSQL database
-    # just for this test run.
+    
     services:
       db:
         image: postgres:13
         # These env vars must match the 'db' service in your docker-compose.yml
-        environment:
+        env: # <-- THIS IS THE FIX (was 'environment:')
           POSTGRES_DB: fitnesshub_db
           POSTGRES_USER: fitnesshub_user
           POSTGRES_PASSWORD: supersecretpassword
@@ -44,7 +40,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install build-essential libpq-dev
-
+        
     - name: Install Python dependencies
       run: |
         pip install -r requirements.txt
