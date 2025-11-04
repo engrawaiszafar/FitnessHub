@@ -4,7 +4,6 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from datetime import date
-from .models import WorkoutSet, DietLog, FoodItem
 from .serializers import WorkoutSetSerializer
 
 # --- UPDATED IMPORTS ---
