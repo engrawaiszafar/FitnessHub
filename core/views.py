@@ -1,9 +1,14 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from datetime import date
-from rest_framework.views import APIViewf
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from datetime import date
+from .models import DietLog, WorkoutSet # <-- Import your models
 
 # --- UPDATED IMPORTS ---
 from .models import (
