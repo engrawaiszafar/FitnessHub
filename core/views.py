@@ -1,9 +1,7 @@
-# core/views.py
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
+# Unused imports 'Token' and 'Response' have been removed.
 
 from .models import DailyWorkout, DietLog, FoodItem
 from .serializers import (
