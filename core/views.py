@@ -22,17 +22,20 @@ from .serializers import (
     FoodItemSerializer
 )
 
+
 class CreateUserViewSet(viewsets.ModelViewSet):
     """Create a new user in the system"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
+
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user"""
     pass
 
 # --- NEW WORKOUT 2.0 VIEWSETS ---
+
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     """Manage exercises in the database (e.g., Bench Press, Squat)"""
@@ -52,6 +55,7 @@ class ExerciseViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Save the new exercise and assign it to the logged-in user"""
         serializer.save(user=self.request.user)
+
 
 class WorkoutSetViewSet(viewsets.ModelViewSet):
     """Manage workout sets (reps, weight) in the database"""
@@ -74,6 +78,7 @@ class WorkoutSetViewSet(viewsets.ModelViewSet):
 
 # --- UNCHANGED DIET VIEWSETS ---
 
+
 class DietLogViewSet(viewsets.ModelViewSet):
     """Manage daily diet logs in the database"""
     serializer_class = DietLogSerializer
@@ -91,6 +96,7 @@ class DietLogViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Save the new diet log and assign it to the logged-in user"""
         serializer.save(user=self.request.user)
+
 
 class FoodItemViewSet(viewsets.ModelViewSet):
     """Manage food items for diet logs"""
