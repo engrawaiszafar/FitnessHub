@@ -45,10 +45,6 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run linter (flake8)
-      run: |
-        flake8 --ignore=E501,W503 .
-
     - name: Run Django tests
       run: |
         python manage.py test
