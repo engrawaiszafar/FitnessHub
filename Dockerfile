@@ -23,4 +23,4 @@ COPY . .
 # Make entrypoint executable
 RUN chmod +x /app/entrypoint.sh
 
-ENTRYPOINT /app/entrypoint.sh
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
