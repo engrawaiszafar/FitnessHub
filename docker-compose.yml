@@ -25,3 +25,5 @@ services:
       - POSTGRES_DB=fitnesshub_db
       - POSTGRES_USER=fitnesshub_user
       - POSTGRES_PASSWORD=supersecretpassword
+volumes:
+  postgres_data:
