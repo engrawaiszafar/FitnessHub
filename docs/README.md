@@ -148,6 +148,7 @@ As a **user**, I want to **enter "ten" instead of "10" for my reps** so I can **
 
 ![Mockup_Landing.png](Mockup_Landing.png)
 
+
 ### 2. Activity Log Page
 
 ![Mockup_ActivityLog.png](Mockup_ActivityLog.png)
