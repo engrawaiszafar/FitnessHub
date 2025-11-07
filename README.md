@@ -97,9 +97,7 @@ For a full list of functional and security requirements, please see the [User St
 
 ## C3: Component Diagram
 
-![Screenshot 2025-11-04 083328.png](Screenshot%202025-11-04%20083328.png)
-
-
+![C3_New.png](C3_New.png)
 
 # 6. License
 
