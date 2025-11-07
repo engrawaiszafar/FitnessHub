@@ -141,3 +141,32 @@ As a **user**, I want to **enter "ten" instead of "10" for my reps** so I can **
 * The frontend JavaScript performs a validation check (parseInt, parseFloat) before submitting data to the API and shows an alert if the data is invalid.
 
 * The backend API serializers (IntegerField, DecimalField) will reject any non-numeric data with a 400 Bad Request response, ensuring data integrity in the database.
+
+## Mockups
+
+### 1. Landing Page
+
+![Mockup_Landing.png](Mockup_Landing.png)
+
+### 2. Activity Log Page
+
+![Mockup_ActivityLog.png](Mockup_ActivityLog.png)
+
+### 3. Food Log Page
+
+![Mockup_FoodLog.png](Mockup_FoodLog.png)
+
+## C4 Model
+
+![C4 Model.png](C4%20Model.png)
+## C1: System Context Diagram
+
+![C1_New.png](C1_New.png)
+
+## C2: Container Diagram
+
+![C2_New.png](C2_New.png)
+
+## C3: Component Diagram
+
+![C3_New.png](C3_New.png)

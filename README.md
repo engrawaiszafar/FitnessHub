@@ -64,40 +64,14 @@ The JavaScript in the file is already configured to connect to your local API at
 I am still currently working on the html file that's why it's not yet available. 
 
 # 4. FitnessHub: User Stories
-For a full list of functional and security requirements, please see the [User Stories and Mitigation Criteria in the documentation folder](docs/requirements.md).
+For a full list of functional and security requirements, please see the User Stories and Mitigation Criteria in the /docs/README.md file.
 
-`docs/user_stories.md`
+[User Stories](./docs/README.md)
 
-# 5. Diagrams: 
+# 5. Diagrams (Mockups and C4): 
+For all the Mockups and C4 diagrams, please see the Mockups section in the /docs/README.md file.
 
-## Mockups
-
-### 1. Landing Page
-
-![Mockup_Landing.png](Mockup_Landing.png)
-
-### 2. Activity Log Page
-
-![Mockup_ActivityLog.png](Mockup_ActivityLog.png)
-
-### 3. Food Log Page
-
-![Mockup_FoodLog.png](Mockup_FoodLog.png)
-
-## C4 Model
-
-![C4 Model.png](C4%20Model.png)
-## C1: System Context Diagram
-
-![C1_New.png](C1_New.png)
-
-## C2: Container Diagram
-
-![C2_New.png](C2_New.png)
-
-## C3: Component Diagram
-
-![C3_New.png](C3_New.png)
+[Diagrams](./docs/README.md)
 
 # 6. License
 
