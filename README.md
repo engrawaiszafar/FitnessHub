@@ -46,16 +46,12 @@ The project is split into two parts:
 
 * the frontend HTML file.
 
-### 
-
-Running the Backend API
+### Running the Backend API
 
 To run the backend, simply use Docker Compose:
 
 #### Start all services (if they are not already running)
 `docker-compose up`
-
-The API will be running at http://127.0.0.1:8000/api/
 
 ### 2. Running the Frontend Application
 
