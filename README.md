@@ -53,7 +53,7 @@ To run the backend, simply use Docker Compose:
 #### Start all services (if they are not already running)
 `docker-compose up`
 
-### 2. Running the Frontend Application
+### Running the Frontend Application
 
 The frontend is a single, self-contained HTML file (e.g., Weekly Workout Planner.html). This file is not served by the backend.
 
@@ -61,12 +61,14 @@ To run the app, simply open the .html file directly in your web browser (e.g., b
 
 The JavaScript in the file is already configured to connect to your local API at http://127.0.0.1:8000. You can create an account, log in, and use all the features of the application.
 
-# FitnessHub: User Stories
+I am still currently working on the html file that's why it's not yet available. 
+
+# 4. FitnessHub: User Stories
 For a full list of functional and security requirements, please see the [User Stories and Mitigation Criteria in the documentation folder](docs/requirements.md).
 
 `docs/user_stories.md`
 
-# C4 Model
+# 5. Diagrams: C4 Model
 
 ![C4 Model.png](C4%20Model.png)
 ## C1: System Context Diagram
@@ -83,7 +85,7 @@ For a full list of functional and security requirements, please see the [User St
 
 
 
-# License
+# 6. License
 
 The MIT License (MIT)
 
