@@ -25,6 +25,12 @@ This will build the 'app' image and start 'app' and 'db' services.
 ## Run database migrations
 This applies the database schema (models) to the PostgreSQL container.
 
+Run
+
+`docker-compose exec app python manage.py makemigrations core`
+
+then run
+
 _`docker-compose exec app python manage.py migrate`_
 
 ## (Optional) Create a superuser to access the Django admin
