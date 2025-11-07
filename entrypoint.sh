@@ -1,11 +1,17 @@
 #!/bin/sh
 
-# This script is the "ENTRYPOINT" for the Docker container.
+echo "Waiting for PostgreSQL to be ready..."
 
-# Run database migrations
-echo "Applying database migrations..."
+# Check DB availability before applying migrations
+while ! nc -z $DB_HOST 5432; do
+  echo "Database is unavailable - sleeping"
+  sleep 1
+done
+
+echo "Database is ready!"
+
+echo "Applying migrations..."
 python manage.py migrate --noinput
 
-# exec "$@" runs the command passed to the container,
-# which in our case will be Gunicorn.
-exec "$@"
+echo "Starting Gunicorn..."
+exec gunicorn fitnesshub.wsgi:application --bind 0.0.0.0:8000
