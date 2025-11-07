@@ -68,16 +68,32 @@ For a full list of functional and security requirements, please see the [User St
 
 `docs/user_stories.md`
 
-# 5. Diagrams: C4 Model
+# 5. Diagrams: 
+
+## Mockups
+
+### 1. Landing Page
+
+![Mockup_Landing.png](Mockup_Landing.png)
+
+### 2. Activity Log Page
+
+![Mockup_ActivityLog.png](Mockup_ActivityLog.png)
+
+### 3. Food Log Page
+
+![Mockup_FoodLog.png](Mockup_FoodLog.png)
+
+## C4 Model
 
 ![C4 Model.png](C4%20Model.png)
 ## C1: System Context Diagram
 
-![C1.png](C1.png)
+![C1_New.png](C1_New.png)
 
 ## C2: Container Diagram
 
-![Screenshot 2025-11-04 083546.png](Screenshot%202025-11-04%20083546.png)
+![C2_New.png](C2_New.png)
 
 ## C3: Component Diagram
 
