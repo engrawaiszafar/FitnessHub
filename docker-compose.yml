@@ -1,17 +1,10 @@
 # docker-compose.yml
-
-version: "3.9"
-
 services:
   app:
     build:
       context: .
     ports:
       - "8000:8000"
-    volumes:
-      # Mounts your local code directory into the container
-      # This enables hot-reloading when you change files
-      - .:/app
     environment:
       # Database connection details
       - DB_HOST=db
@@ -32,6 +25,3 @@ services:
       - POSTGRES_DB=fitnesshub_db
       - POSTGRES_USER=fitnesshub_user
       - POSTGRES_PASSWORD=supersecretpassword
-
-volumes:
-  postgres_data:
