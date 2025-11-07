@@ -20,13 +20,12 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entrypoint script
-COPY entrypoint.sh .
+
+# Copy everything INCLUDING entrypoint
+COPY . .
+
 # Make the script executable
 RUN chmod +x /app/entrypoint.sh
-
-# Copy the rest of the application code into the container
-COPY . .
 
 # Set the entrypoint for the container
 ENTRYPOINT ["/app/entrypoint.sh"]
