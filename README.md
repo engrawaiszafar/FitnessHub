@@ -74,7 +74,8 @@ For all the Mockups and C4 diagrams, please see the Mockups section in the /docs
 [Diagrams](./docs/README.md)
 
 # 6. AI Disclosure:**
-I utilized AI tools to help structure my thoughts for this documentation and assist with troubleshooting and debugging code. Additionally, the frontend development (still ongoing) will be based on conceptual mockups generated using AI tools.
+While I am the primary developer of this application, I utilized AI tools to assist with code debugging, structuring my documentation, and generating conceptual mockups to guide the frontend design (Still ongoing).
+
 # 7. License
 
 The MIT License (MIT)
