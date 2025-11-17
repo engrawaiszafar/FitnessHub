@@ -1,7 +1,7 @@
 # 1. **FitnessHub: The executive summary**
 ![logo.png](logo.png)
 
-FitnessHub is your all-in-one personal wellness command center. Stop juggling spreadsheets and static logs—FitnessHub provides a secure, dynamic platform that connects your entire fitness journey, from your diet and daily caloric goals to the specific sets, reps, and weight of every lift. It's the only application you'll need to confidently track your progress, secure your data, and turn vague aspirations into measurable results.
+FitnessHub is your all-in-one personal wellness command center. Stop juggling spreadsheets and static logs-FitnessHub provides a secure, dynamic platform that connects your entire fitness journey, from your diet and daily caloric goals to the specific sets, reps, and weight of every lift. It's the only application you'll need to confidently track your progress, secure your data, and turn vague aspirations into measurable results.
 
 The **"why"** of this project is to provide a single, reliable platform for users to manage their fitness journey. It connects user authentication with deep, relational data, tracking not just that a user worked out, but the specific sets, reps, and weight for every exercise. It also provides a detailed, date-based diet planner to log meals and track caloric intake against a user-defined goal.
 
@@ -73,7 +73,10 @@ For all the Mockups and C4 diagrams, please see the Mockups section in the /docs
 
 [Diagrams](./docs/README.md)
 
-# 6. License
+# 6. AI Disclosure:**
+> While I wrote this draft and developed the code myself, I utilized AI tools to help structure and outline my thoughts for this assignment. Additionally, the frontend development (still ongoing) is based on conceptual mockups generated using AI tools.
+
+# 7. License
 
 The MIT License (MIT)
 

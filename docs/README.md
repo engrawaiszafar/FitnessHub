@@ -117,12 +117,11 @@ As a **malicious user**, I want to **guess API endpoint IDs to see another user'
 
 #### MUS-1.2 ####
 As a **malicious user**, I want to **submit a malicious script into an exercise name or food name field** so I can **trigger a Cross-Site Scripting (XSS) attack when my (or another user's) browser renders that data**.
-
 #### Mitigation Criteria:
 
-* The Django backend's ORM automatically parameterizes queries, preventing SQL Injection.
+* Content Security Policy (CSP): The application implements a strict Content Security Policy HTTP header that prevents the browser from executing unauthorized inline scripts or loading scripts from untrusted sources.
 
-* The frontend application must never use .innerHTML to render user-provided text. All user-supplied data (exercise names, food names, etc.) must be rendered using .textContent or .innerText to ensure the browser treats it as plain text, not as executable code.
+* Output Escaping: The frontend application must never use .innerHTML to render user-provided text. All user-supplied data (exercise names, food names, etc.) must be rendered using .textContent or .innerText to ensure the browser treats it as plain text, not as executable code.
 
 #### MUS-1.3 ####
 As a **malicious user**, I want to **run a script to rapidly guess a user's password** so I can **brute-force my way into their account**.
